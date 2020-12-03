@@ -66,4 +66,12 @@ router.delete('/:id', async (req, res) => {
 
 })
 
+router.put('/', async (req, res) => {
+    await Task.updateMany({}, { completed: true }, null, (error, result) => {
+        error
+            ? res.send({ statusCode: 10, message: error.message })
+            : res.send({ ...successResponseBody, result })
+    })
+})
+
 module.exports = router
